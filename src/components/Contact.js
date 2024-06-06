@@ -1,13 +1,13 @@
 import { Button, Text, View } from "react-native";
 
-export default function Contact() {
+export default function Contact({ contact }) {
   return (
     <View>
-      <Text>Photo</Text>
-      <Text>Nom</Text>
-      <Text>prenom</Text>
-      <Text>email</Text>
-      <Text>tel</Text>
+      <Text>{contact.avatar}</Text>
+      <Text>{contact.lastName}</Text>
+      <Text>{contact.firstName}</Text>
+      <Text>{contact.email}</Text>
+      <Text>{contact.phone}</Text>
       <Button title="CALL" />
     </View>
   );

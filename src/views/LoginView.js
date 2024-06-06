@@ -1,12 +1,22 @@
-import { Text, View } from "react-native";
+import { Text, View, StyleSheet, Button } from "react-native";
 import Error from "../components/Error";
+import Login from "../components/Login";
 
-export default function LoginView() {
+export default function LoginView({ navigation }) {
   return (
-    <View>
-      <Text>Login</Text>
-      <Text>Log</Text>
+    <View style={style.container}>
+      <Login navigation={navigation} />
       <Error />
     </View>
   );
 }
+
+const style = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
+    flexDirection: "column",
+  },
+});
