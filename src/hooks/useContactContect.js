@@ -1,7 +1,9 @@
-import { useReducer, useContext, createContext } from "react";
+import { useReducer, useContext, createContext, useEffect } from "react";
+import { getAdminContactsList } from "../services/api";
 
-const ContactContext = createContext();
+export const ContactContext = createContext(null);
 
+// action
 const contactReducer = (state, action) => {
   switch (action.type) {
     case "SET_CONTACT":
@@ -10,7 +12,42 @@ const contactReducer = (state, action) => {
       return { ...state.contact, [action.payload.id]: action.payload };
     case "DELETE_CONTACT":
       return null;
+    case "SET_JWT_TOKEN":
+      return { ...state, jwtToken: action.payload };
     default:
       return state;
   }
+};
+
+// Provider
+export const ContactProvider = ({ children }) => {
+  const [state, dispatch] = useReducer(contactReducer, {
+    jwtToken: null,
+    contacts: [],
+  });
+
+  useEffect(() => {
+    const fetchContact = async () => {
+      const response = await getAdminContactsList();
+      dispatch({ type: "SET_CONTACT", payload: response });
+    };
+
+    // const fetchJwtToken = async () => {
+    //   const response = await getJwtToken();
+    //   dispatch({ type: "SET_JWT_TOKEN", payload: response });
+    // };
+    fetchContact();
+    // fetchJwtToken();
+  }, []);
+
+  return (
+    <ContactContext.Provider value={{ state, dispatch }}>
+      {children}
+    </ContactContext.Provider>
+  );
+};
+
+export const useContactContext = () => {
+  const { state, dispatch } = useContext(ContactContext);
+  return { state, dispatch };
 };
