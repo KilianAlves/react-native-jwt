@@ -23,22 +23,22 @@ const contactReducer = (state, action) => {
 export const ContactProvider = ({ children }) => {
   const [state, dispatch] = useReducer(contactReducer, {
     jwtToken: null,
-    contacts: [],
+    contacts: null,
   });
 
-  useEffect(() => {
-    const fetchContact = async () => {
-      const response = await getAdminContactsList();
-      dispatch({ type: "SET_CONTACT", payload: response });
-    };
+  // useEffect(() => {
+  //   const fetchContact = async () => {
+  //     const response = await getAdminContactsList();
+  //     dispatch({ type: "SET_CONTACT", payload: response });
+  //   };
 
-    // const fetchJwtToken = async () => {
-    //   const response = await getJwtToken();
-    //   dispatch({ type: "SET_JWT_TOKEN", payload: response });
-    // };
-    fetchContact();
-    // fetchJwtToken();
-  }, []);
+  //   // const fetchJwtToken = async () => {
+  //   //   const response = await getJwtToken();
+  //   //   dispatch({ type: "SET_JWT_TOKEN", payload: response });
+  //   // };
+  //   fetchContact();
+  //   // fetchJwtToken();
+  // }, []);
 
   return (
     <ContactContext.Provider value={{ state, dispatch }}>
