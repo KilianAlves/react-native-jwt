@@ -4,8 +4,9 @@ import Error from "../components/Error";
 import { useEffect, useState } from "react";
 import { getContactInfo } from "../services/api";
 import { useContactContext } from "../hooks/useContactContect";
+import Menu from "../components/Menu";
 
-export default function ContactView({ route }) {
+export default function ContactView({ route, navigation }) {
   const { state } = useContactContext();
   const { contact } = route.params;
   const [contactInfo, setContactInfo] = useState({});
@@ -20,6 +21,7 @@ export default function ContactView({ route }) {
   console.log("ContactInfo: ", contactInfo);
   return (
     <View>
+      <Menu navigation={navigation} />
       <Contact contact={contactInfo} />
       <Error />
     </View>

@@ -4,6 +4,7 @@ import { loginAPI } from "../actions/authentification";
 import { useContactContext } from "../hooks/useContactContect";
 import * as SecureStore from "expo-secure-store";
 import { getMe } from "../services/api";
+import { style } from "../../App";
 
 export default function Login({ navigation }) {
   const [login, setLogin] = useState("c");
@@ -44,15 +45,21 @@ export default function Login({ navigation }) {
   };
   return (
     <View>
-      <TextInput placeholder="login" value={login} onChangeText={setLogin} />
+      <TextInput
+        placeholder="login"
+        value={login}
+        onChangeText={setLogin}
+        style={style.input}
+      />
       <TextInput
         placeholder="Password"
         autoComplete="current-password"
         secureTextEntry
         value={password}
         onChangeText={setPassword}
+        style={style.input}
       />
-      <Button title="Login" onPress={handleLogin} />
+      <Button title="Login" onPress={handleLogin} style={style.button} />
     </View>
   );
 }

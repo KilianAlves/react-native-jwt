@@ -13,6 +13,8 @@ const contactReducer = (state, action) => {
       return null;
     case "SET_JWT_TOKEN":
       return { ...state, jwtToken: action.payload };
+    case "LOGOUT":
+      return { ...state, jwtToken: null };
     default:
       return state;
   }
@@ -35,7 +37,8 @@ export const ContactProvider = ({ children }) => {
   //   //   const response = await getJwtToken();
   //   //   dispatch({ type: "SET_JWT_TOKEN", payload: response });
   //   // };
-  //   fetchContact();
+  //   fetchContact();  };
+
   //   // fetchJwtToken();
   // }, []);
 
