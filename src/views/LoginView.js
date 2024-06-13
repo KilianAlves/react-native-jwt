@@ -1,4 +1,4 @@
-import { Text, View, StyleSheet, Button } from "react-native";
+import { View, StyleSheet } from "react-native";
 import Error from "../components/Error";
 import Login from "../components/Login";
 

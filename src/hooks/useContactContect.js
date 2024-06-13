@@ -1,5 +1,4 @@
-import { useReducer, useContext, createContext, useEffect } from "react";
-import { getAdminContactsList } from "../services/api";
+import { useReducer, useContext, createContext } from "react";
 
 export const ContactContext = createContext(null);
 

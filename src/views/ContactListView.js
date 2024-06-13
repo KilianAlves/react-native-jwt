@@ -9,10 +9,8 @@ export default function ContactListView({ navigation }) {
   const { state, dispatch } = useContactContext();
 
   useEffect(() => {
-    console.log("fetching contacts");
     const fetchContacts = async () => {
       const response = await getUserContactsList(state.jwtToken);
-      console.log("response : ", response);
       dispatch({ type: "SET_CONTACT", payload: response });
       return response;
     };
@@ -20,7 +18,6 @@ export default function ContactListView({ navigation }) {
   }, [dispatch, state.jwtToken]);
 
   const contacts = state.contacts;
-  console.log("Contacts: ", contacts);
 
   if (contacts === null) {
     return <Text>Loading</Text>;
@@ -28,7 +25,7 @@ export default function ContactListView({ navigation }) {
   // <ContactList contacts={contacts} />
   return (
     <View>
-      <ContactList contacts={contacts} />
+      <ContactList contacts={contacts} navigation={navigation} />
       <Error />
     </View>
   );

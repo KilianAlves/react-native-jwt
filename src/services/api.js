@@ -19,3 +19,12 @@ export async function getUserContactsList(jwtToken) {
     },
   }).then((response) => response.json());
 }
+
+export async function getContactInfo(jwtToken, contactId) {
+  console.log("contactInfo ID : ", contactId);
+  return fetch(`http://localhost:3000/api/contact/${contactId}`, {
+    headers: {
+      Authorization: `Bearer ${jwtToken}`,
+    },
+  }).then((response) => response.json());
+}

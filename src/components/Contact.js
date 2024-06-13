@@ -1,9 +1,10 @@
-import { Button, Text, View } from "react-native";
+import { Button, Text, View, Image } from "react-native";
 
 export default function Contact({ contact }) {
+  console.log("ContactCard : ", contact);
   return (
     <View>
-      <Text>{contact.avatar}</Text>
+      <Image source={{ uri: contact.avatar }} width={50} height={50} />
       <Text>{contact.lastName}</Text>
       <Text>{contact.firstName}</Text>
       <Text>{contact.email}</Text>
