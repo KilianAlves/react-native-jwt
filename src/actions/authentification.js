@@ -18,3 +18,16 @@ export async function loginAPI(data) {
     }).then((response) => response.json());
   }
 }
+
+export async function registerAPI(data, jwtToken) {
+  return fetch("http://localhost:3000/api/user", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${jwtToken}`,
+    },
+    body: JSON.stringify({
+      username: data.username,
+    }),
+  }).then((response) => response.json());
+}

@@ -4,6 +4,7 @@ import LoginView from "./src/views/LoginView";
 import ContactListView from "./src/views/ContactListView";
 import ContactView from "./src/views/ContactView";
 import { ContactProvider } from "./src/hooks/useContactContect";
+import RegisterView from "./src/views/RegisterView";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -15,6 +16,7 @@ export default function App() {
           <Stack.Screen name="Login" component={LoginView} />
           <Stack.Screen name="ContactsList" component={ContactListView} />
           <Stack.Screen name="Contact" component={ContactView} />
+          <Stack.Screen name="Register" component={RegisterView} />
         </Stack.Navigator>
       </NavigationContainer>
     </ContactProvider>

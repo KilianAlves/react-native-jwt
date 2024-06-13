@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { loginAPI } from "../actions/authentification";
 import { useContactContext } from "../hooks/useContactContect";
 import * as SecureStore from "expo-secure-store";
+import { getMe } from "../services/api";
 
 export default function Login({ navigation }) {
   const [login, setLogin] = useState("c");
@@ -28,12 +29,17 @@ export default function Login({ navigation }) {
     console.log("response");
     console.log("handleLogin =>", response);
 
-    if (response.error) {
-      console.log("error");
-    } else {
+    if (response.jwt) {
       dispatch({ type: "SET_JWT_TOKEN", payload: response.jwt });
       await SecureStore.setItemAsync("jwtToken", response.jwt);
-      navigation.navigate("ContactsList");
+      const me = await getMe(response.jwt);
+      if (me.code === "notfound") {
+        navigation.navigate("Register");
+      } else {
+        navigation.navigate("ContactsList");
+      }
+    } else {
+      console.log("error");
     }
   };
   return (
