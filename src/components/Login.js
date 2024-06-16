@@ -16,12 +16,12 @@ export default function Login({ navigation }) {
   useEffect(() => {
     const getJwtToken = async () => {
       const jwtToken = await SecureStore.getItemAsync("jwtToken");
+      console.log("refreshToken =>", jwtToken)
       if (jwtToken) {
         dispatch({ type: "SET_JWT_TOKEN", payload: jwtToken });
         navigation.navigate("ContactsList");
       }
     };
-    console.log("useEffect");
     getJwtToken();
   }, []);
 
@@ -32,7 +32,7 @@ export default function Login({ navigation }) {
 
     if (response.jwt) {
       dispatch({ type: "SET_JWT_TOKEN", payload: response.jwt });
-      await SecureStore.setItemAsync("jwtToken", response.jwt);
+      await SecureStore.setItemAsync("jwtToken", response.refreshToken);
       const me = await getMe(response.jwt);
       if (me.code === "notfound") {
         navigation.navigate("Register");
