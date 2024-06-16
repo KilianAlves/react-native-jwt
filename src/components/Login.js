@@ -4,7 +4,7 @@ import { loginAPI } from "../actions/authentification";
 import { useContactContext } from "../hooks/useContactContect";
 import * as SecureStore from "expo-secure-store";
 import { getMe } from "../services/api";
-import { style } from "../../App";
+import style from "../Style";
 
 export default function Login({ navigation }) {
   const [login, setLogin] = useState("c");
@@ -15,10 +15,20 @@ export default function Login({ navigation }) {
   // useEffect pour obtenir le refreshToken et permettre de se co automatiquement
   useEffect(() => {
     const getJwtToken = async () => {
+      // recupère le refreshToken
       const jwtToken = await SecureStore.getItemAsync("jwtToken");
-      console.log("refreshToken =>", jwtToken)
+      // si le refreshToken n'est pas null
       if (jwtToken) {
-        dispatch({ type: "SET_JWT_TOKEN", payload: jwtToken });
+        // recupère le jwtToken à partir du refreshToken
+        jwtFromRefresh = await loginAPI({ refreshToken: jwtToken });
+        // Verification si le refreshToken est valide
+        if (jwtFromRefresh.error === "wrongrefresh") {
+          // si le refreshToken n'est pas valide on le supprime  & on retourne au login
+          await SecureStore.deleteItemAsync("jwtToken");
+          navigation.navigate("Login");
+          return;
+        }
+        dispatch({ type: "SET_JWT_TOKEN", payload: jwtFromRefresh.jwt });
         navigation.navigate("ContactsList");
       }
     };
