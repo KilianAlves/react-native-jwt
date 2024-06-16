@@ -21,10 +21,20 @@ export async function getUserContactsList(jwtToken) {
 }
 
 export async function getContactInfo(jwtToken, contactId) {
-  console.log("contactInfo ID : ", contactId);
   return fetch(`http://localhost:3000/api/contact/${contactId}`, {
     headers: {
       Authorization: `Bearer ${jwtToken}`,
     },
+  }).then((response) => response.json());
+}
+
+export async function updateContact(jwtToken, contact) {
+  return fetch(`http://localhost:3000/api/contact/${contact.id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${jwtToken}`,
+    },
+    body: JSON.stringify(contact),
   }).then((response) => response.json());
 }
