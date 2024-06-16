@@ -2,6 +2,7 @@ import { Button, Text, TextInput, View } from "react-native";
 import { useState } from "react";
 import { registerAPI } from "../actions/authentification";
 import { useContactContext } from "../hooks/useContactContect";
+import style from "../Style";
 
 export default function Register({ navigation }) {
   const { state } = useContactContext();
@@ -25,8 +26,9 @@ export default function Register({ navigation }) {
         placeholder="Username"
         value={username}
         onChange={setUsername}
+        style={style.input}
       />
-      <Button title="Register" onPress={handleRegister} />
+      <Button title="Register" onPress={handleRegister} style={style.button} />
     </View>
   );
 }

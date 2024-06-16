@@ -5,6 +5,7 @@ import { getUserContactsList } from "../services/api";
 import { useEffect } from "react";
 import ContactList from "../components/ContactList";
 import Menu from "../components/Menu";
+import style from "../Style";
 
 export default function ContactListView({ navigation }) {
   const { state, dispatch } = useContactContext();
@@ -20,12 +21,14 @@ export default function ContactListView({ navigation }) {
 
   const contacts = state.contacts;
 
+  console.log("contacts => => ", contacts);
+  console.log("state contact => => ", state.contacts)
+
   if (contacts === null) {
     return <Text>Loading</Text>;
   }
-  // <ContactList contacts={contacts} />
   return (
-    <View>
+    <View style={style.view} >
       <Menu navigation={navigation} />
       <ContactList contacts={contacts} navigation={navigation} />
       <Error />

@@ -2,7 +2,7 @@ import { Button, Text, View } from "react-native";
 import { useEffect, useState } from "react";
 import { useContactContext } from "../hooks/useContactContect";
 import { getMe } from "../services/api";
-import { style } from "../../App";
+import style from "../Style";
 import * as SecureStore from "expo-secure-store";
 
 export default function Menu({ navigation }) {

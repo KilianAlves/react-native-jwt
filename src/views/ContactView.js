@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { getContactInfo } from "../services/api";
 import { useContactContext } from "../hooks/useContactContect";
 import Menu from "../components/Menu";
+import style from "../Style";
 
 export default function ContactView({ route, navigation }) {
   const { state } = useContactContext();
@@ -17,12 +18,10 @@ export default function ContactView({ route, navigation }) {
     };
     fetchContactInfo();
   }, [contact, state.jwtToken]);
-  console.log("Contact: ", contact);
-  console.log("ContactInfo: ", contactInfo);
   return (
-    <View>
+    <View style={style.view}>
       <Menu navigation={navigation} />
-      <Contact contact={contactInfo} />
+      <Contact contact={contactInfo} navigation={navigation} />
       <Error />
     </View>
   );
