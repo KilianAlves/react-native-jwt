@@ -8,7 +8,7 @@ const contactReducer = (state, action) => {
     case "SET_CONTACT":
       return { ...state, contacts: action.payload };
     case "ADD_CONTACT":
-      return { ...state.contact, [action.payload.id]: action.payload };
+      return { ...state, contacts: [...state.contacts, action.payload] };
     case "DELETE_CONTACT":
       return null;
     case "SET_JWT_TOKEN":
@@ -26,21 +26,6 @@ export const ContactProvider = ({ children }) => {
     jwtToken: null,
     contacts: null,
   });
-
-  // useEffect(() => {
-  //   const fetchContact = async () => {
-  //     const response = await getAdminContactsList();
-  //     dispatch({ type: "SET_CONTACT", payload: response });
-  //   };
-
-  //   // const fetchJwtToken = async () => {
-  //   //   const response = await getJwtToken();
-  //   //   dispatch({ type: "SET_JWT_TOKEN", payload: response });
-  //   // };
-  //   fetchContact();  };
-
-  //   // fetchJwtToken();
-  // }, []);
 
   return (
     <ContactContext.Provider value={{ state, dispatch }}>

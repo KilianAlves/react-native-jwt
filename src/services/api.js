@@ -38,3 +38,14 @@ export async function updateContact(jwtToken, contact) {
     body: JSON.stringify(contact),
   }).then((response) => response.json());
 }
+
+export async function postContact(jwtToken, contact) {
+  return fetch(`http://localhost:3000/api/contact`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${jwtToken}`,
+    },
+    body: JSON.stringify(contact),
+  }).then((response) => response.json());
+}
